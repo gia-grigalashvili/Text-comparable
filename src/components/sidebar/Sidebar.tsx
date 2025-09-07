@@ -1,20 +1,15 @@
 // SidebarResponsive.jsx
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
-import {
-  FaMicrophone,
-  FaWaveSquare,
-  FaFilePdf,
-  FaBars,
-  FaTimes,
-} from "react-icons/fa";
-import { AiOutlineFontSize } from "react-icons/ai";
+import { FaMicrophone, FaBars, FaTimes } from "react-icons/fa";
 import { RiTranslate } from "react-icons/ri";
-import Logo from "/public/imgs/ძირითადი-ლოგო-ai 1.png"; // path გადაამოწმე
-
+import Logo from "/public/imgs/ძირითადი-ლოგო-ai 1.png"; 
+import check from "../../../public/imgs/check.png";
+import aligncenter from "../../../public/imgs/align-center.png";
+import Pdf from "../../../public/imgs/programming-code-document.png";
 const menu = [
   {
-    icon: <AiOutlineFontSize className="w-4 h-4 sm:w-5 sm:h-5" />,
+    icon: <img src={check} alt="გრამატიკა" className="w-4 h-4 sm:w-5 sm:h-5" />,
     label: "გრამატიკა",
     path: "/grammar",
   },
@@ -29,12 +24,20 @@ const menu = [
     path: "/voice-to-text",
   },
   {
-    icon: <FaWaveSquare className="w-4 h-4 sm:w-5 sm:h-5" />,
+    icon: (
+      <img
+        src={aligncenter}
+        alt="ტექსტი → ხმა"
+        className="w-4 h-4 sm:w-5 sm:h-5"
+      />
+    ),
     label: "ტექსტი → ხმა",
     path: "/text-to-voice",
   },
   {
-    icon: <FaFilePdf className="w-4 h-4 sm:w-5 sm:h-5" />,
+    icon: (
+      <img src={Pdf} alt="PDF კონვერტაცია" className="w-4 h-4 sm:w-5 sm:h-5" />
+    ),
     label: "PDF კონვერტაცია",
     path: "/pdf",
   },
@@ -64,8 +67,8 @@ export default function SidebarResponsive() {
 
   return (
     <>
-      <aside className="hidden lg:flex fixed top-0 left-0 h-full w-56 xl:w-64 bg-[#0a1f4d] text-white  shadow-2xl z-40 flex-col">
-        <div className="flex items-center gap-2 xl:gap-3 p-3 xl:p-4 border-b border-[#083055]">
+      <aside className="hidden  lg:flex fixed top-0 left-0 h-full w-56 xl:w-64 bg-[#0a1f4d] text-white  shadow-2xl z-40 flex-col">
+        <div className="flex items-center gap-2 xl:gap-3 p-5 px-8 ">
           <img
             src={Logo}
             alt="logo"
@@ -83,7 +86,6 @@ export default function SidebarResponsive() {
         </div>
       </aside>
 
-      {/* Mobile Header Bar - Fixed at top on smaller screens */}
       <header className="fixed top-0 left-0 right-0 w-full h-14 sm:h-16 flex items-center bg-[#0a1f4d] justify-between px-4 lg:hidden shadow-lg z-30">
         <div className="flex items-center gap-2 sm:gap-3">
           <img
