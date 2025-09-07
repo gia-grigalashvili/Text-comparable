@@ -10,9 +10,12 @@ import MainComparison from "./components/Comparison/MainComparison";
 function App() {
   return (
     <Router>
-      <div className="flex flex-col md:flex-row min-h-screen">
+      <div className="flex min-h-screen">
+        {/* Sidebar - Fixed on desktop, header on mobile */}
         <SidebarResponsive />
-        <div className="flex-1 flex flex-col">
+        
+        {/* Main Content Area - with proper margins */}
+        <div className="flex-1 lg:ml-56 xl:ml-64 pt-14 sm:pt-16 lg:pt-0">
           <Routes>
             <Route path="/" element={<Navigate to="/composition" replace />} />
             <Route path="/grammar" element={<MainComparison />} />

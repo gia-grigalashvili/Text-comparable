@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useCallback } from "react";
-import { ArrowLeftRight } from "lucide-react";
+
 import Header from "./header/Header";
 import ThankYouMessage from "./Text/ThankYouMessage";
 import TextComparison from "./Text/TextComparison";
@@ -181,7 +181,6 @@ const MainComparison: React.FC = () => {
         ) : (
           <TextComparison
             renderDiffText={renderDiffText}
-            ArrowLeftRight={ArrowLeftRight}
             rightDiff={rightDiff}
             handleLeftTextChange={handleLeftTextChange}
             handleRightTextChange={handleRightTextChange}
@@ -193,20 +192,19 @@ const MainComparison: React.FC = () => {
           />
         )}
 
-        <div className="mt-6 col-span-2 flex justify-center lg:justify-start">
+        <div className="mt-6 flex justify-center">
           <button
             onClick={handleCompare}
             disabled={!canCompare || hasCompared}
             className={`px-6 py-2 rounded-md flex items-center gap-2 transition-all duration-200 font-medium
-              ${
-                hasCompared
-                  ? "bg-green-100 text-green-800 border border-green-200 cursor-not-allowed"
-                  : canCompare
-                  ? "bg-blue-600 text-white hover:bg-blue-700 active:bg-blue-800 shadow-sm hover:shadow-md"
-                  : "bg-gray-400 text-white cursor-not-allowed"
-              }`}
+      ${
+        hasCompared
+          ? "bg-green-100 text-green-800 border border-green-200 cursor-not-allowed"
+          : canCompare
+          ? "bg-blue-600 text-white hover:bg-blue-700 active:bg-blue-800 shadow-sm hover:shadow-md"
+          : "bg-gray-400 text-white cursor-not-allowed"
+      }`}
           >
-            <ArrowLeftRight className="w-4 h-4" />
             {displayButtonText}
           </button>
         </div>

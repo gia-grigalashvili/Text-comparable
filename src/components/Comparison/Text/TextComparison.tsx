@@ -1,5 +1,5 @@
-import React from "react";
-
+import React, { type JSX } from "react";
+import Arrrow from "../../../../public/imgs/Arrow.png";
 interface TextComparisonProps {
   renderDiffText: (diffArray: any[]) => JSX.Element[];
   handleLeftTextChange: (value: string) => void;
@@ -10,7 +10,6 @@ interface TextComparisonProps {
   leftDiff: any[];
   rightDiff: any[];
   texts: any;
-  ArrowLeftRight: React.ElementType;
 }
 
 export default function TextComparison({
@@ -22,7 +21,7 @@ export default function TextComparison({
   texts,
   rightText,
   handleRightTextChange,
-  ArrowLeftRight,
+
   rightDiff,
 }: TextComparisonProps) {
   return (
@@ -82,7 +81,7 @@ export default function TextComparison({
 
         {/* Arrow */}
         <div className="hidden lg:block absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
-          <ArrowLeftRight className="w-8 h-8 opacity-60 text-gray-400" />
+          <img src={Arrrow} alt="" />
         </div>
 
         {/* Legend */}

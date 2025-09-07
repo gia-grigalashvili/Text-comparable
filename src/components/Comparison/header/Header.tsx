@@ -1,5 +1,3 @@
-import React from "react";
-
 interface HeaderProps {
   onAddNew: () => void;
   onLanguageChange: (language: string) => void;
@@ -12,30 +10,30 @@ export default function Header({
   selectedLanguage,
 }: HeaderProps) {
   return (
-    <header className="w-full bg-white border-b px-4 py-3 flex items-center justify-between">
+    <header className="w-full border px-6 py-4 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
       {/* Language Selector */}
-      <div className="flex items-center gap-4">
+      <div className="flex flex-col  sm:flex-row w-full gap-8">
         <select
           value={selectedLanguage}
           onChange={(e) => onLanguageChange(e.target.value)}
-          className="border rounded px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="border border-[#E0E0E0] rounded px-4 py-2 w-full sm:w-[220px]   focus:ring-blue-500 pr-10"
         >
           <option value="ქართული">ქართული</option>
           <option value="English">English</option>
         </select>
 
-        <label className="flex items-center gap-2 text-sm text-gray-600">
+        <label className="flex items-center gap-2 text-sm text-gray-600 w-full sm:w-auto">
           <input type="checkbox" className="w-4 h-4" />
-          ტექსტის შედარება
+          ფორმატის შენარჩუნება
         </label>
       </div>
 
-      {/* Add button */}
       <button
         onClick={onAddNew}
-        className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
+        className="bg-blue-600 text-white px-4 py-2 rounded-[8px] hover:bg-blue-700 transition md:w-auto flex items-center justify-center gap-2 whitespace-nowrap"
       >
-        + ახლის დამატება
+        <span className="text-lg">+</span>
+        <span>ახლის გახსნა</span>
       </button>
     </header>
   );
