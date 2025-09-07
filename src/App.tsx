@@ -1,7 +1,9 @@
+import Sidebar from "./components/sidebar/Sidebar";
+
 function App() {
   return (
     <>
-      <p className="text-red-600">hello</p>
+      <Sidebar />
     </>
   );
 }
