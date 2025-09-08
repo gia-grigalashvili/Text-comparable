@@ -10,13 +10,14 @@ export default function Header({
   selectedLanguage,
 }: HeaderProps) {
   return (
-    <header className="w-full border px-6 py-4 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-      {/* Language Selector */}
-      <div className="flex flex-col  sm:flex-row w-full gap-8">
+    <header className="w-full px-6 py-4 flex flex-col md:flex-row md:items-center md:justify-between gap-4 relative">
+      <div className="absolute bottom-0 left-6 right-6 border-b border-gray-200"></div>
+
+      <div className="flex flex-col sm:flex-row w-full gap-8">
         <select
           value={selectedLanguage}
           onChange={(e) => onLanguageChange(e.target.value)}
-          className="border border-[#E0E0E0] rounded px-4 py-2 w-full sm:w-[220px]   focus:ring-blue-500 pr-10"
+          className="border border-[#E0E0E0] rounded px-4 py-2 w-full sm:w-[220px] focus:ring-blue-500 pr-10"
         >
           <option value="ქართული">ქართული</option>
           <option value="English">English</option>

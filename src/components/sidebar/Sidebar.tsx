@@ -3,14 +3,15 @@ import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { FaMicrophone, FaBars, FaTimes } from "react-icons/fa";
 import { RiTranslate } from "react-icons/ri";
-import Logo from "/public/imgs/ძირითადი-ლოგო-ai 1.png"; 
+import Logo from "/public/imgs/ძირითადი-ლოგო-ai 1.png";
 import check from "../../../public/imgs/check.png";
 import aligncenter from "../../../public/imgs/align-center.png";
 import Pdf from "../../../public/imgs/programming-code-document.png";
+import tamar from "../../../public/imgs/Usermages.png";
 const menu = [
   {
     icon: <img src={check} alt="გრამატიკა" className="w-4 h-4 sm:w-5 sm:h-5" />,
-    label: "გრამატიკა",
+    label: "მართლმწერი",
     path: "/grammar",
   },
   {
@@ -79,9 +80,18 @@ export default function SidebarResponsive() {
         <nav className="flex-1 mt-2 xl:mt-4 overflow-y-auto">
           <ul className="space-y-1 xl:space-y-2  pl-6">{renderMenu()}</ul>
         </nav>
-        <div className="p-3 xl:p-4 border-t border-gray-700">
-          <button className="w-full py-2 text-sm xl:text-base bg-blue-900 rounded-lg hover:bg-blue-700 transition-colors duration-200">
-            ტამარ ომანიძე
+        <div className="p-4 border-t">
+          <button className="w-full flex items-center justify-between py-2 px-3 transition-colors duration-200 text-sm sm:text-base">
+            <div className="flex items-center gap-2">
+              <img
+                src={tamar}
+                alt="ტამარ ონიანი"
+                className="w-6 h-6 rounded-full"
+              />
+              <span>თამარ ონიანი</span>
+            </div>
+
+            <span className="text-lg font-bold">...</span>
           </button>
         </div>
       </aside>
@@ -143,7 +153,8 @@ export default function SidebarResponsive() {
 
         <div className="p-4 border-t border-[#083055] bg-[#083055]">
           <button className="w-full py-2 bg-blue-900 rounded-lg hover:bg-blue-700 transition-colors duration-200 text-sm sm:text-base">
-            ტამარ ომანიძე
+            <img src={tamar} alt="" />
+            ტამარ ონიანი
           </button>
         </div>
       </aside>

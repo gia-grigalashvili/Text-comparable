@@ -20,21 +20,35 @@ const MainComparison: React.FC = () => {
   const [hasCompared, setHasCompared] = useState(false);
   const [showThankYou, setShowThankYou] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState("ქართული");
+  const [isEditing, setIsEditing] = useState(false);
 
   const handleLanguageChange = useCallback((language: string) => {
     setSelectedLanguage(language);
     setLeftText("");
     setRightText("");
     setHasCompared(false);
+    setIsEditing(false);
   }, []);
 
-  const handleLeftTextChange = useCallback((value: string) => {
-    setLeftText(value);
-  }, []);
+  const handleLeftTextChange = useCallback(
+    (value: string) => {
+      setLeftText(value);
+      if (hasCompared && !isEditing) {
+        setIsEditing(true);
+      }
+    },
+    [hasCompared, isEditing]
+  );
 
-  const handleRightTextChange = useCallback((value: string) => {
-    setRightText(value);
-  }, []);
+  const handleRightTextChange = useCallback(
+    (value: string) => {
+      setRightText(value);
+      if (hasCompared && !isEditing) {
+        setIsEditing(true);
+      }
+    },
+    [hasCompared, isEditing]
+  );
 
   const computeDiff = useCallback(
     (text1: string, text2: string): DiffResult => {
@@ -74,10 +88,10 @@ const MainComparison: React.FC = () => {
   );
 
   const { leftDiff, rightDiff } = useMemo(() => {
-    if (!hasCompared || (!leftText && !rightText))
+    if (!hasCompared || isEditing || (!leftText && !rightText))
       return { leftDiff: [], rightDiff: [] };
     return computeDiff(leftText, rightText);
-  }, [leftText, rightText, hasCompared, computeDiff]);
+  }, [leftText, rightText, hasCompared, isEditing, computeDiff]);
 
   const renderDiffText = useCallback(
     (diffArray: DiffItem[]) =>
@@ -98,25 +112,31 @@ const MainComparison: React.FC = () => {
   );
 
   const handleCompare = useCallback(() => {
-    if (leftText.trim() && rightText.trim()) setHasCompared(true);
+    if (leftText.trim() && rightText.trim()) {
+      setHasCompared(true);
+      setIsEditing(false);
+    }
   }, [leftText, rightText]);
 
   const handleAddNew = useCallback(() => setShowThankYou(true), []);
+
   const handleContinue = useCallback(() => {
     setShowThankYou(false);
     setHasCompared(false);
     setLeftText("");
     setRightText("");
+    setIsEditing(false);
   }, []);
 
   const canCompare = leftText.trim() && rightText.trim();
+  const shouldShowComparison = hasCompared && !isEditing;
 
   const displayButtonText =
     selectedLanguage === "English"
-      ? hasCompared
+      ? shouldShowComparison
         ? "Compared"
         : "Compare"
-      : hasCompared
+      : shouldShowComparison
       ? "შედარებულია"
       : "შედარება";
 
@@ -130,6 +150,11 @@ const MainComparison: React.FC = () => {
           characters: "characters",
           deletedText: "Deleted text",
           addedText: "Added text",
+          textToSpeech: "Text → Speech",
+          speechToText: "Speech → Text",
+          pdfConversion: "PDF Conversion",
+          textComposition: "Text Composition",
+          grammar: "Grammar",
         }
       : {
           firstText: "პირველი ტექსტი",
@@ -139,6 +164,11 @@ const MainComparison: React.FC = () => {
           characters: "სიმბოლო",
           deletedText: "წაშლილი ტექსტი",
           addedText: "დამატებული ტექსტი",
+          textToSpeech: "ტექსტი → ხმა",
+          speechToText: "ხმა → ტექსტი",
+          pdfConversion: "PDF კონვერტაცია",
+          textComposition: "ტექსტის შემდგენლობა",
+          grammar: "გრამატიკა",
         };
 
   return (
@@ -151,10 +181,7 @@ const MainComparison: React.FC = () => {
 
       <div className="p-6 max-w-7xl mx-auto">
         {showThankYou ? (
-          <ThankYouMessage
-            onContinue={handleContinue}
-            selectedLanguage={selectedLanguage}
-          />
+          <ThankYouMessage onContinue={handleContinue} />
         ) : (
           <TextComparison
             renderDiffText={renderDiffText}
@@ -162,7 +189,7 @@ const MainComparison: React.FC = () => {
             handleLeftTextChange={handleLeftTextChange}
             handleRightTextChange={handleRightTextChange}
             rightText={rightText}
-            hasCompared={hasCompared}
+            hasCompared={shouldShowComparison}
             leftDiff={leftDiff}
             texts={texts}
             leftText={leftText}
@@ -172,10 +199,10 @@ const MainComparison: React.FC = () => {
         <div className="mt-6 flex justify-center">
           <button
             onClick={handleCompare}
-            disabled={!canCompare || hasCompared}
+            disabled={!canCompare || shouldShowComparison}
             className={`px-6 py-2 rounded-md flex items-center gap-2 transition-all duration-200 font-medium
       ${
-        hasCompared
+        shouldShowComparison
           ? "bg-green-100 text-green-800 border border-green-200 cursor-not-allowed"
           : canCompare
           ? "bg-blue-600 text-white hover:bg-blue-700 active:bg-blue-800 shadow-sm hover:shadow-md"

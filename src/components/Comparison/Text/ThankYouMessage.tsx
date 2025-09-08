@@ -1,5 +1,10 @@
 import { FileText } from "lucide-react";
-export default function ThankYouMessage({ onContinue }) {
+
+interface ThankYouMessageProps {
+  onContinue: () => void;
+}
+
+export default function ThankYouMessage({ onContinue }: ThankYouMessageProps) {
   return (
     <div className="bg-white rounded-lg shadow-sm border">
       <div className="p-12 text-center">
