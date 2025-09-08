@@ -1,9 +1,4 @@
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import SidebarResponsive from "./components/sidebar/Sidebar";
 import MainComparison from "./components/Comparison/MainComparison";
 import Grammar from "./components/Grammar/Grammar";
