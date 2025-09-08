@@ -21,23 +21,6 @@ const MainComparison: React.FC = () => {
   const [showThankYou, setShowThankYou] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState("ქართული");
 
-  const isGeorgianCharacter = (char: string) =>
-    /[\u10A0-\u10FF\s\p{P}\d]/u.test(char);
-  const isEnglishCharacter = (char: string) => /[a-zA-Z\s\p{P}\d]/u.test(char);
-
-  const validateInput = useCallback(
-    (input: string, language: string) =>
-      input
-        .split("")
-        .filter((char) =>
-          language === "ქართული"
-            ? isGeorgianCharacter(char)
-            : isEnglishCharacter(char)
-        )
-        .join(""),
-    []
-  );
-
   const handleLanguageChange = useCallback((language: string) => {
     setSelectedLanguage(language);
     setLeftText("");
@@ -45,19 +28,13 @@ const MainComparison: React.FC = () => {
     setHasCompared(false);
   }, []);
 
-  const handleLeftTextChange = useCallback(
-    (value: string) => {
-      setLeftText(validateInput(value, selectedLanguage));
-    },
-    [selectedLanguage, validateInput]
-  );
+  const handleLeftTextChange = useCallback((value: string) => {
+    setLeftText(value);
+  }, []);
 
-  const handleRightTextChange = useCallback(
-    (value: string) => {
-      setRightText(validateInput(value, selectedLanguage));
-    },
-    [selectedLanguage, validateInput]
-  );
+  const handleRightTextChange = useCallback((value: string) => {
+    setRightText(value);
+  }, []);
 
   const computeDiff = useCallback(
     (text1: string, text2: string): DiffResult => {
