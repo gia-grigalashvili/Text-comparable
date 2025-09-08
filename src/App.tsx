@@ -21,7 +21,7 @@ function App() {
         {/* Main Content Area - with proper margins */}
         <div className="flex-1 lg:ml-56 xl:ml-64 pt-14 sm:pt-16 lg:pt-0">
           <Routes>
-            <Route path="/" element={<Navigate to="/composition" replace />} />
+            <Route path="/" element={<MainComparison />} />
             <Route path="/grammar" element={<Grammar />} />
             <Route path="/composition" element={<MainComparison />} />
             <Route path="/voice-to-text" element={<TextVoise />} />
