@@ -35,17 +35,19 @@ export default function TextComparison({
             </div>
           </div>
 
-          <div className="relative">
+          <div className="relative min-h-[24rem]">
             <textarea
               value={leftText}
               onChange={(e) => handleLeftTextChange(e.target.value)}
               placeholder={texts.placeholder1}
-              className="w-full h-96 p-4 bg-[#F0F7FF] rounded-md resize-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+              className={`w-full h-96 p-4 bg-[#F0F7FF] rounded-md resize-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 ${
+                hasCompared ? "opacity-0" : "opacity-100"
+              }`}
             />
 
             {hasCompared && (
-              <div className="absolute inset-0 p-4 bg-[#F0F7FF] rounded-md overflow-y-auto pointer-events-none">
-                <div className="whitespace-pre-wrap leading-relaxed text-transparent">
+              <div className="absolute inset-0 p-4 bg-[#F0F7FF] rounded-md overflow-y-auto h-96">
+                <div className="whitespace-pre-wrap leading-relaxed">
                   {leftDiff.length > 0 ? renderDiffText(leftDiff) : leftText}
                 </div>
               </div>
@@ -61,17 +63,19 @@ export default function TextComparison({
             </div>
           </div>
 
-          <div className="relative">
+          <div className="relative min-h-[24rem]">
             <textarea
               value={rightText}
               onChange={(e) => handleRightTextChange(e.target.value)}
               placeholder={texts.placeholder2}
-              className="w-full h-96 p-4 bg-[#F0F7FF] rounded-md resize-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+              className={`w-full h-96 p-4 bg-[#F0F7FF] rounded-md resize-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 ${
+                hasCompared ? "opacity-0" : "opacity-100"
+              }`}
             />
 
             {hasCompared && (
-              <div className="absolute inset-0 p-4 bg-[#F0F7FF] rounded-md overflow-y-auto pointer-events-none">
-                <div className="whitespace-pre-wrap leading-relaxed text-transparent">
+              <div className="absolute inset-0 p-4 bg-[#F0F7FF] rounded-md overflow-y-auto h-96">
+                <div className="whitespace-pre-wrap leading-relaxed">
                   {rightDiff.length > 0 ? renderDiffText(rightDiff) : rightText}
                 </div>
               </div>
@@ -84,13 +88,13 @@ export default function TextComparison({
         </div>
 
         {hasCompared && (
-          <div className="mt-6 flex items-center gap-6 text-sm col-span-2">
+          <div className="mt-6 flex flex-wrap items-center gap-4 lg:gap-6 text-sm col-span-full lg:col-span-2">
             <div className="flex items-center gap-2">
-              <div className="w-4 h-4 bg-red-100 border-red-200 border rounded"></div>
+              <div className="w-4 h-4 bg-red-100 border-red-200 border rounded flex-shrink-0"></div>
               <span className="text-gray-600">{texts.deletedText}</span>
             </div>
             <div className="flex items-center gap-2">
-              <div className="w-4 h-4 bg-green-100 border-green-200 border rounded"></div>
+              <div className="w-4 h-4 bg-green-100 border-green-200 border rounded flex-shrink-0"></div>
               <span className="text-gray-600">{texts.addedText}</span>
             </div>
           </div>
